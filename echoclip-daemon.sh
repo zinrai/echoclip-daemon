@@ -35,7 +35,7 @@ cleanup() {
 # Daemonize itself
 daemonize() {
     # Terminate any existing process
-    pkill -f "nc -l 12345 | pbcopy"
+    pkill -f "nc -l 127.0.0.1 12345 | pbcopy"
 
     # Re-execute itself with nohup
     if [ "$1" != "daemon" ]; then
@@ -51,7 +51,7 @@ main() {
 
     # Start the clipboard monitoring in the background
     while true; do
-        nc -l 12345 | pbcopy &
+        nc -l 127.0.0.1 12345 | pbcopy &
         wait $!
     done
 }
